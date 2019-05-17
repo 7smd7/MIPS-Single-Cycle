@@ -13,15 +13,10 @@ module ALU (
 		in1 = r1;
 		in2 = r2;
 		case(OP)
-			2'b00: out = in1 + in2; //ADD and ADDI also LB, LW, SB ,SW
-			2'b01: out = in1 & in2; //AND and ANDI
-			2'b10: out = in1 | in2; //OR and ORI
-			2'b11: begin //BEQ
-						if (in1 == in2)
-                            out = 1'b1;
-						else
-                            out = 1'b0;
-					end
+			2'b00: out = in1 + in2; //ADD, LW,SW
+			2'b01: out = in1 & in2; //AND 
+			2'b10: out = in1 | in2; //OR
+			2'b11: out = in1 - in2; //SUB, BEq
 			default: out = 0;
 		endcase
         if (out==0)
