@@ -1,15 +1,12 @@
 module ALU (
 	input [31:0] r1,
 	input [31:0] r2,
-	input [3:0] OP,
+	input [1:0] OP,
 	output [31:0] result,
 	output zero
 );
 
-    reg zero_w;
-
     always @(*) begin
-		zero_w = 1'b0;
 		in1 = r1;
 		in2 = r2;
 		case(OP)
@@ -19,9 +16,7 @@ module ALU (
 			2'b11: out = in1 - in2; //SUB, BEq
 			default: out = 0;
 		endcase
-        if (out==0)
-            zero_w = 1'b1;
 	end
-	assign zero = zero_w;
+	assign zero = (result==16'd0) ? 1'b1: 1'b0;
 	assign result = out;
 endmodule
