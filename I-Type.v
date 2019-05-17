@@ -6,3 +6,4 @@ module fulladder(a,b,c,s,ca);
     assign s=(a^b^c);
     assign ca=((a&b)|(b&c)|(c&a));
 endmodule 
+//test
