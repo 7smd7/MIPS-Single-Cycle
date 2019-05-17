@@ -6,32 +6,26 @@ module ALU (
 	output zero
 );
 
-reg zero_w;
+    reg zero_w;
 
-always @(*) 
-	begin
+    always @(*) begin
 		zero_w = 1'b0;
 		in1 = r1;
 		in2 = r2;
 		case(OP)
-			4'b0000: out = in1 + in2; //ADD and ADDI also LB, LW, SB ,SW
-			4'b0001: out = in1 & in2; //AND and ANDI
-			4'b0010: out = in1 | in2; //OR and ORI
-			4'b0011: out = in1 << in2; //SLL, in1 shifted left by in2 amount
-			4'b0100: out = (in1 < in2) ? 1 : 0; //SLT and SLTI, set on less than, output is set to 1 if in1<in2 else 0
-			4'b0101: out = in1 >> in2; //SRL, in1 shifted right by in2 amount
-			4'b0110: out = in1 - in2; //SUB
-			4'b0111: out = in1 ^ in2; //XOR and XORI
-			4'b1000: begin //BEQ, zero flag is 1 if branch is true i.e., if both inputs are equal
-						if (in1 == in2) zero_w = 1'b1;
-						else zero_w = 1'b0;
-					 end
-			4'b1001: begin //BNE, zero flag is 1 if branch is true i.e., if both inputs are not equal
-						if (in1 != in2) zero_w = 1'b1;
-						else zero_w = 1'b0;
-					  end
+			3'b000: out = in1 + in2; //ADD and ADDI also LB, LW, SB ,SW
+			3'b001: out = in1 & in2; //AND and ANDI
+			3'b010: out = in1 | in2; //OR and ORI
+			3'b011: begin //BEQ, zero flag is 1 if branch is true i.e., if both inputs are equal
+						if (in1 == in2)
+                            out = 1'b1;
+						else
+                            out = 1'b0;
+					end
 			default: out = 0;
 		endcase
+        if (out==0)
+            zero_w = 1'b1;
 	end
 	assign zero = zero_w;
 	assign result = out;
