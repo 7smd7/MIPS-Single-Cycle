@@ -1,6 +1,9 @@
-module pc(clk, rst, pcPrev,pcNext);
+module pc(clk, rst, pcPrev,pc);
 
     input clk, rst;
+    input [31:0]pcPrev;
+    output [31:0]pc;
+
     reg  [31:0] pc_val;
 
     always @(posedge clk or posedge reset)  

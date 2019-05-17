@@ -12,7 +12,7 @@ module ReqFile(RegWrite,rd_reg1,rd_reg2,wr_reg,wr_data,rd_data1,rd_data2);
 
     always@(posedge clk) begin
         if((RegWrite==1'b1) && (wr_reg!=5'd0)) begin
-            registers[wr_reg] <= #1 wr_data;
+            registers[wr_reg] <= wr_data;
         end
     end
         

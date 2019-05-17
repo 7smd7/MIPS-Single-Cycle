@@ -16,7 +16,7 @@ module ALU (
 			2'b00: out = in1 + in2; //ADD and ADDI also LB, LW, SB ,SW
 			2'b01: out = in1 & in2; //AND and ANDI
 			2'b10: out = in1 | in2; //OR and ORI
-			2'b11: begin //BEQ, zero flag is 1 if branch is true i.e., if both inputs are equal
+			2'b11: begin //BEQ
 						if (in1 == in2)
                             out = 1'b1;
 						else
