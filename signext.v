@@ -5,7 +5,7 @@ module signext(ip, op);
 
     always @(*) begin
     ext [15:0]  = ip;
-    ext [31:16] = {16{ip[15]}};
+    ext [31:16] = ip[15];
     end
 
     assign op = ext;

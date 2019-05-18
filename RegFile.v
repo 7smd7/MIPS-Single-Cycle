@@ -8,7 +8,7 @@ module ReqFile(RegWrite,rd_reg1,rd_reg2,wr_reg,wr_data,rd_data1,rd_data2);
     output [31:0] rd_data1;
     output [31:0] rd_data2;
 
-    reg  [31:0] registers [1:31];  
+    reg  [31:0] registers [1:31]; //??  
     always@(*) begin
         if((RegWrite==1'b1) && (wr_reg!=5'd0)) begin
             registers[wr_reg] <= wr_data;
