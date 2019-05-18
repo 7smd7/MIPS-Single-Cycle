@@ -8,7 +8,7 @@ module PC(clk, rst, PCin,PCout);
         if(reset)   
             PCout <= 0;  
         else
-            PCout <= PCin + 4;  
+            PCout <= PCin;  
     end
 
 endmodule
