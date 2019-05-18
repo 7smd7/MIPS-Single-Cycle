@@ -1,19 +1,14 @@
-module pc(clk, rst, pcPrev,pc);
+module PC(clk, rst, PCin,PCout);
 
     input clk, rst;
-    input [31:0]pcPrev;
-    output [31:0]pc;
+    input [31:0]PCin;
+    output reg [31:0]PCout;
 
-    reg  [31:0] pc_val;
-
-    always @(posedge clk or posedge reset)  
-    begin 
+    always @(posedge clk)  begin 
         if(reset)   
-            pc_val <= 31'd0;  
+            PCout <= 0;  
         else
-            pc_val <= pcPrev;  
-    end  
-
-    assign pc = pc_val;
+            PCout <= PCin + 4;  
+    end
 
 endmodule

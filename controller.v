@@ -1,31 +1,49 @@
 module control( input[5:0] opcode,  
-                        output reg[1:0] reg_dst,mem_to_reg,alu_op,  
-                        output reg branch,mem_read,mem_write,alu_src,reg_write                     
+                output reg[1:0] alu_op,  
+                output reg reg_dst,mem_to_reg,branch,mem_read,mem_write,alu_src,reg_write                     
 );  
 always @(*)  
 begin   
     case(opcode)   
-    3'b000: begin // add  
-            reg_dst = 2'b01;  
-            mem_to_reg = 2'b00;  
-            alu_op = 2'b00;  
-            jump = 1'b0;  
-            branch = 1'b0;  
-            mem_read = 1'b0;  
-            mem_write = 1'b0;  
-            alu_src = 1'b0;  
-            reg_write = 1'b1;  
+        0: begin //R-type  
+            reg_dst = 1;  
+            alu_src = 0;  
+            mem_to_reg = 0;  
+            reg_write = 1;  
+            mem_read = 0;  
+            mem_write = 0;  
+            branch = 0;  
+            alu_op = 2;  
             end  
-
-    default: begin  
-            reg_dst = 2'b01;  
-            mem_to_reg = 2'b00;  
-            alu_op = 2'b00; 
-            branch = 1'b0;  
-            mem_read = 1'b0;  
-            mem_write = 1'b0;  
-            alu_src = 1'b0;  
-            reg_write = 1'b1;   
+        35: begin //LW 
+            reg_dst = 0;  
+            alu_src = 1;  
+            mem_to_reg = 1;  
+            reg_write = 1;  
+            mem_read = 1;  
+            mem_write = 0;  
+            branch = 0;  
+            alu_op = 0;  
+            end  
+        43: begin //SW
+            reg_dst = 0;  
+            alu_src = 1;  
+            mem_to_reg = 0;  
+            reg_write = 0;  
+            mem_read = 0;  
+            mem_write = 1;  
+            branch = 0;  
+            alu_op = 0;  
+            end  
+        4: begin //BEq
+            reg_dst = 0;  
+            alu_src = 0;  
+            mem_to_reg = 0;  
+            reg_write = 0;  
+            mem_read = 0;  
+            mem_write = 0;  
+            branch = 1;  
+            alu_op = 1;  
             end  
     endcase   
 end  

@@ -17,6 +17,6 @@ module ALU (
 			default: out = 0;
 		endcase
 	end
-	assign zero = (result==16'd0) ? 1'b1: 1'b0;
+	assign zero = (result==0);
 	assign result = out;
 endmodule
