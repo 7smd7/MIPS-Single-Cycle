@@ -1,7 +1,7 @@
 module inst_mem
 (  
      input   [31:0]  pc,  
-     output  [31:0]  instruction  
+     output reg [31:0]  instruction  
 );  
      reg [31:0] rom[15:0];
 

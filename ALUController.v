@@ -3,7 +3,7 @@ module ALUControl( ALUCtl, ALUOp, Func);
     input [1:0] ALUOp;
     input [5:0] Func;
  
-    always @((ALUOp, Func) begin  
+    always @(ALUOp, Func) begin  
         if(ALUOp == 0)
            ALUCtl <= 0;    //LW and SW use add
         else if(ALUOp == 1)

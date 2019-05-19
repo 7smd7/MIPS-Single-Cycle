@@ -116,7 +116,7 @@ module MipsCPU(clock, reset
     );
 
     output wire [31:0] Add_PCOut;
-    adder add_alu_0(
+    adder add_alu(
         //inputs
         .ip1(PCout),
         .ip2(4),

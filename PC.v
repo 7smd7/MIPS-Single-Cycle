@@ -5,7 +5,7 @@ module PC(clk, rst, PCin,PCout);
     output reg [31:0]PCout;
 
     always @(posedge clk)  begin 
-        if(reset)   
+        if(rst)   
             PCout <= 0;  
         else
             PCout <= PCin;  

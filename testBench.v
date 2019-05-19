@@ -1,4 +1,4 @@
-module tb_mips16;  
+module tb_mips;  
     // Inputs  
     reg clk;  
     reg reset;  
@@ -6,7 +6,7 @@ module tb_mips16;
 
     MipsCPU singCycle (  
         .clock(clk),   
-        .reset(reset),
+        .reset(reset)
     );  
     initial begin  
         clk = 0;  
