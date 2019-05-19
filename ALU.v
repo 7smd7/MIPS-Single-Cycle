@@ -5,15 +5,14 @@ module ALU (
 	output [31:0] result,
 	output zero
 );
-
-    always @(*) begin
-		in1 = r1;
-		in2 = r2;
+	reg [31:0] out;
+	
+  always @(*) begin
 		case(OP)
-			2'b00: out = in1 + in2; //ADD, LW,SW
-			2'b01: out = in1 & in2; //AND 
-			2'b10: out = in1 | in2; //OR
-			2'b11: out = in1 - in2; //SUB, BEq
+			2'b00: out = r1 + r2; //ADD, LW,SW
+			2'b01: out = r1 & r2; //AND 
+			2'b10: out = r1 | r2; //OR
+			2'b11: out = r1 - r2; //SUB, BEq
 			default: out = 0;
 		endcase
 	end

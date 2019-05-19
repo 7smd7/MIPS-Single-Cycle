@@ -1,14 +1,13 @@
-module MipsCPU(clock, reset
-                /*, PCin, PCout, inst,
-                RegDst, RegWrite, ALUSrc, MemtoReg, MemRead, MemWrite, Branch,
-                ALUOp, WriteReg, ReadData1, ReadData2, Extend32, ALU_B, ShiftOut,
-                ALUCtl, Zero, ALUOut, Add_ALUOut, AndGateOut, ReadData, WriteData_Reg*/
-            ); 
+module MipsCPU(clock, reset); 
     
     input clock;
     input reset; 
 
-    output wire [31:0] PCin, PCout;
+    wire [31:0] WriteData_Reg;
+    wire [4:0]  WriteReg;
+    wire [31:0] Add_PCOut;
+
+    wire [31:0] PCin, PCout;
     PC pc_0(
         //inputs
         .clk(clock), .rst(reset), .PCin(PCin),
@@ -16,16 +15,16 @@ module MipsCPU(clock, reset
         .PCout(PCout) 
     );
 
-    output wire [31:0] inst;
-    InstMem instmem_0(
+    wire [31:0] inst;
+    inst_mem instmem_0(
         //inputs
         .pc(PCin),
         //outputs
         .instruction(inst)
    );
 
-    output wire RegDst, RegWrite, ALUSrc, MemtoReg, MemRead, MemWrite, Branch; 
-    output wire [1:0] ALUOp;
+    wire RegDst, RegWrite, ALUSrc, MemtoReg, MemRead, MemWrite, Branch; 
+    wire [1:0] ALUOp;
     control main_control_0(
         //inputs
         .opcode(inst[31:26]),
@@ -45,20 +44,20 @@ module MipsCPU(clock, reset
             .out(WriteReg)
             );
     
-    output wire [31:0] ReadData1, ReadData2; 
-    RegFile regfile_0(
+    wire [31:0] ReadData1, ReadData2; 
+    ReqFile regfile_0(
         //inputs
         .rd_reg1(inst[25:21]), 
         .rd_reg2(inst[20:16]),
         .RegWrite(RegWrite),
         .wr_reg(WriteReg),
-        .WriteData(WriteData_Reg), 
+        .wr_data(WriteData_Reg), 
         //outputs
         .rd_data1(ReadData1),
         .rd_data2(ReadData2)
     ); 
 
-    output wire [31:0] Extend32; 
+    wire [31:0] Extend32; 
     signext sign_extend_0(
         //inputs
         .ip(inst[15:0]),
@@ -66,18 +65,17 @@ module MipsCPU(clock, reset
         .op(Extend32)
     );
 
-    //Connection of Mux2
-    output wire [31:0] ALU_B;
+    wire [31:0] ALU_B;
     mux_2_1 mux2_0(
         //inputs
         .sel(ALUSrc),
-        .in1(ReadData2),
-        .in2(Extend32),
+        .in0(ReadData2),
+        .in1(Extend32),
         //outputs
         .out(ALU_B)
     );   
 
-    output wire [31:0] ShiftOut;
+    wire [31:0] ShiftOut;
     lshift shift_left2_0(
         //inputs
         .ip(Extend32),
@@ -85,7 +83,7 @@ module MipsCPU(clock, reset
         .op(ShiftOut)
     ); 
 
-    output wire [3:0] ALUCtl;
+    wire [3:0] ALUCtl;
     ALUControl alu_control_0(
         //inputs
         .ALUOp(ALUOp),
@@ -94,8 +92,8 @@ module MipsCPU(clock, reset
         .ALUCtl(ALUCtl)
     );
 
-    output wire Zero;
-    output wire [31:0] ALUOut;
+    wire Zero;
+    wire [31:0] ALUOut;
     ALU alu_0(
         //inputs
         .r1(ReadData1),
@@ -106,7 +104,7 @@ module MipsCPU(clock, reset
         .zero(Zero)
     ); 
 
-    output wire [31:0] Add_ALUOut;
+    wire [31:0] Add_ALUOut;
     adder add_alu_0(
         //inputs
         .ip1(Add_PCOut),
@@ -115,7 +113,7 @@ module MipsCPU(clock, reset
         .out(Add_ALUOut)
     );
 
-    output wire [31:0] Add_PCOut;
+    //wire [31:0] Add_PCOut;
     adder add_alu(
         //inputs
         .ip1(PCout),
@@ -124,7 +122,7 @@ module MipsCPU(clock, reset
         .out(Add_PCOut)
     );
 
-    output wire AndGateOut;
+    wire AndGateOut;
     AndGate and_gate_0(
         //inputs
         .Branch(Branch),
@@ -142,7 +140,7 @@ module MipsCPU(clock, reset
         .out(PCin)
     ); 
 
-    output wire [31:0] ReadData;
+    wire [31:0] ReadData;
     data_memory  data_memory_0(
         //inputs
         .addr(ALUOut),
@@ -153,13 +151,12 @@ module MipsCPU(clock, reset
         .read_data(ReadData)
     ); 
 
-    output wire[31:0] WriteData_Reg;
     mux_2_1 mu3_0(
         //inputs
-        .in0(ReadData),
-        .in1(ALUOut),
+        .in0(ALUOut),
+        .in1(ReadData),
         //outputs
         .out(WriteData_Reg)
     );
 
-endmodule;
+endmodule
