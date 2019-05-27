@@ -7,7 +7,7 @@ module ALUControl( ALUCtl, ALUOp, Func);
         if(ALUOp == 0)
            ALUCtl <= 0;    //LW and SW use add
         else if(ALUOp == 1)
-           ALUCtl <= 3;  // branch use subtract
+           ALUCtl <= 3;   // branch use subtract
         else
             case(Func)
                 32: ALUCtl <= 0; //add

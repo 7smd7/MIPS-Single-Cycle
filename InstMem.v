@@ -3,7 +3,7 @@ module inst_mem
      input   [31:0]  pc,  
      output reg [31:0]  instruction  
 );  
-     reg [31:0] rom[15:0];
+     reg [31:0] rom[0:15];
 
      initial begin  
           rom[0] =  32'h00221820;  

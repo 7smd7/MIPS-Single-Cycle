@@ -18,7 +18,7 @@ module MipsCPU(clock, reset);
     wire [31:0] inst;
     inst_mem instmem_0(
         //inputs
-        .pc(PCin),
+        .pc(PCout),
         //outputs
         .instruction(inst)
    );
@@ -83,7 +83,7 @@ module MipsCPU(clock, reset);
         .op(ShiftOut)
     ); 
 
-    wire [3:0] ALUCtl;
+    wire [1:0] ALUCtl;
     ALUControl alu_control_0(
         //inputs
         .ALUOp(ALUOp),
@@ -155,6 +155,7 @@ module MipsCPU(clock, reset);
         //inputs
         .in0(ALUOut),
         .in1(ReadData),
+        .sel(MemtoReg),
         //outputs
         .out(WriteData_Reg)
     );

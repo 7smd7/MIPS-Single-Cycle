@@ -7,7 +7,7 @@ module ALU (
 );
 	reg [31:0] out;
 	
-  always @(*) begin
+  always @(r1,r2,OP) begin
 		case(OP)
 			2'b00: out = r1 + r2; //ADD, LW,SW
 			2'b01: out = r1 & r2; //AND 

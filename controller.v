@@ -2,7 +2,7 @@ module control( input[5:0] opcode,
                 output reg[1:0] alu_op,  
                 output reg reg_dst,mem_to_reg,branch,mem_read,mem_write,alu_src,reg_write                     
 );  
-always @(*)  
+always @(opcode)  
 begin   
     case(opcode)   
         0: begin //R-type  
