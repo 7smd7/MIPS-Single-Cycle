@@ -10,10 +10,10 @@ module ALUControl( ALUCtl, ALUOp, Func);
            ALUCtl <= 3;   // branch use subtract
         else
             case(Func)
-                32: ALUCtl <= 0; //add
-                36: ALUCtl <= 1; //and
-                37: ALUCtl <= 2; //or
-                34: ALUCtl <= 3; //sub
+                40: ALUCtl <= 0; //add
+                44: ALUCtl <= 1; //and
+                45: ALUCtl <= 2; //or
+                42: ALUCtl <= 3; //sub
                 default: ALUCtl <=0;
             endcase
     end 
