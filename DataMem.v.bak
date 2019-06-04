@@ -22,6 +22,6 @@ module data_memory
           if (mem_write==1 & mem_read==0)  
                ram[addr] = write_data;  
           if (mem_write==0 & mem_read==1)
-               read_data = ram[addr] ;  
-     end 
+               read_data = ram[addr]   
+     end;  
 endmodule   
