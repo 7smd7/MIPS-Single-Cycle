@@ -117,7 +117,7 @@ module MipsCPU(clock, reset);
     adder add_alu(
         //inputs
         .ip1(PCout),
-        .ip2(4),
+        .ip2(1),
         //outputs
         .out(Add_PCOut)
     );
