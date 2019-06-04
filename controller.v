@@ -25,7 +25,7 @@ begin
             branch = 0;  
             alu_op = 0;  
             end  
-        43: begin //SW
+        53: begin //SW
             reg_dst = 0;  
             alu_src = 1;  
             mem_to_reg = 0;  
@@ -35,7 +35,7 @@ begin
             branch = 0;  
             alu_op = 0;  
             end  
-        4: begin //BEq
+        default: begin //BEq
             reg_dst = 0;  
             alu_src = 0;  
             mem_to_reg = 0;  
