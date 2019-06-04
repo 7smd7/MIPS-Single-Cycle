@@ -12,6 +12,6 @@ module inst_mem
         rom[3]=32'b00100010001110001100001000000000; //sub $7,$6,$2
      end  
      always @(pc)
-        instruction <= rom[pc];
-     //    instruction <= rom[pc[31:2]];
+        instruction = rom[pc];
+     //    instruction = rom[pc[31:2]];
 endmodule

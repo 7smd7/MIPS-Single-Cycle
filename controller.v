@@ -25,7 +25,7 @@ begin
             branch = 0;  
             alu_op = 0;  
             end  
-        53: begin //SW
+        43: begin //SW
             reg_dst = 0;  
             alu_src = 1;  
             mem_to_reg = 0;  
