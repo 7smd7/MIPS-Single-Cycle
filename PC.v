@@ -6,9 +6,9 @@ module PC(clk, rst, PCin,PCout);
 
     always @(posedge clk)  begin 
         if(rst)   
-            PCout <= 0;  
+            PCout = 0;  
         else
-            PCout <= PCin;  
+            PCout = PCin;  
     end
 
 endmodule
